@@ -1,0 +1,31 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title-group>
+      <mat-card-title>Features</mat-card-title>
+      <button mat-flat-button color="accent">New feature</button>
+    </mat-card-title-group>
+  </mat-card-header>
+  <mat-card-content>
+    <table mat-table [dataSource]="featureService.getFeatures()">
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>Title</th>
+        <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let element">{{ getStatus(element) }}</td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element">
+          <a [routerLink]="['details']" [queryParams]="{ id: element.id }"></a>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="['title', 'status', 'actions']"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: ['title', 'status', 'actions']"
+      ></tr>
+    </table>
+  </mat-card-content>
+</mat-card>

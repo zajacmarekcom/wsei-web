@@ -1,1 +1,33 @@
-<p>task-list works!</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title-group>
+      <mat-card-title>Tasks</mat-card-title>
+      <button mat-flat-button color="accent">New task</button>
+    </mat-card-title-group>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="row" cdkDropListGroup>
+      <div class="col border-right">
+        <app-task-list-column
+          title="To do"
+          [data]="toDo"
+          [dropEvent]="startTask"
+        ></app-task-list-column>
+      </div>
+      <div class="col border-right">
+        <app-task-list-column
+          title="Doing"
+          [data]="doing"
+          [dropEvent]="startTask"
+        ></app-task-list-column>
+      </div>
+      <div class="col">
+        <app-task-list-column
+          title="Done"
+          [data]="done"
+          [dropEvent]="startTask"
+        ></app-task-list-column>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
