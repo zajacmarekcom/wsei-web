@@ -15,6 +15,8 @@ export class FeatureService {
     const newId = ids.length > 0 ? Math.max(...ids) + 1 : 1;
 
     newFeature.id = newId;
+    newFeature.status = Status.ToDo;
+    newFeature.createDate = new Date();
     this._features.push(newFeature);
   }
 

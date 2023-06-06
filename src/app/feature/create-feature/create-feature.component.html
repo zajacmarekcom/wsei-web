@@ -1,1 +1,24 @@
-<p>create-feature works!</p>
+<mat-card class="form-card">
+  <mat-card-header>
+    <mat-card-title-group>
+      <mat-card-title>New feature</mat-card-title>
+    </mat-card-title-group>
+  </mat-card-header>
+  <mat-card-content class="vertical-content" [formGroup]="feature">
+    <mat-form-field class="w-100">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" />
+      <span
+        *ngIf="feature.controls.title.touched && feature.controls.title.errors"
+        >{{ feature.controls.title.errors | json }}</span
+      >
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-actions>
+    <button (click)="addFeature()" mat-flat-button color="accent">Add</button>
+  </mat-card-actions>
+</mat-card>

@@ -5,6 +5,8 @@ import { LayoutComponent } from './layout/layout.component';
 import { TaskListComponent } from './task/task-list/task-list.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FeatureListComponent } from './feature/feature-list/feature-list.component';
+import { CreateFeatureComponent } from './feature/create-feature/create-feature.component';
+import { FeatureDetailsComponent } from './feature/feature-details/feature-details.component';
 
 const routes: Routes = [
   {
@@ -24,6 +26,14 @@ const routes: Routes = [
       {
         path: 'features',
         component: FeatureListComponent,
+      },
+      {
+        path: 'feature/add',
+        component: CreateFeatureComponent,
+      },
+      {
+        path: 'feature/details/:id',
+        component: FeatureDetailsComponent,
       },
       {
         path: 'tasks',

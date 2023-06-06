@@ -2,7 +2,9 @@
   <mat-card-header>
     <mat-card-title-group>
       <mat-card-title>Features</mat-card-title>
-      <button mat-flat-button color="accent">New feature</button>
+      <button routerLink="/app/feature/add" mat-flat-button color="accent">
+        New feature
+      </button>
     </mat-card-title-group>
   </mat-card-header>
   <mat-card-content>
@@ -18,7 +20,7 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Actions</th>
         <td mat-cell *matCellDef="let element">
-          <a [routerLink]="['details']" [queryParams]="{ id: element.id }"></a>
+          <a [routerLink]="['../feature', 'details', element.id]">Details</a>
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="['title', 'status', 'actions']"></tr>

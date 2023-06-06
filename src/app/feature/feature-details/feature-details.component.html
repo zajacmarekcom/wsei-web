@@ -1,1 +1,53 @@
-<p>feature-details works!</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title-group>
+      <mat-card-title>Feature: {{ feature?.title }}</mat-card-title>
+      <button routerLink="/app/features" mat-flat-button>Back</button>
+    </mat-card-title-group>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-card>
+      <mat-card-content>
+        <h4>
+          Status: <b>{{ getStatus(feature?.status) }}</b>
+        </h4>
+        <div>
+          {{ feature?.description }}
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Tasks</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <table mat-table [dataSource]="getTasks()">
+          <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef>Title</th>
+            <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+          </ng-container>
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Status</th>
+            <td mat-cell *matCellDef="let element">
+              {{ getStatus(element.status) }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+              <a [routerLink]="['../task', 'details', element.id]">Details</a>
+            </td>
+          </ng-container>
+          <tr
+            mat-header-row
+            *matHeaderRowDef="['title', 'status', 'actions']"
+          ></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: ['title', 'status', 'actions']"
+          ></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </mat-card-content>
+</mat-card>
