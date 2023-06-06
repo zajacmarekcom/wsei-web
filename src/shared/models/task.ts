@@ -10,6 +10,6 @@ export interface Task {
   priority: Priority;
   estimatedTime: number;
   createDate: Date;
-  startDate: Date;
-  finishDate: Date;
+  startDate: Date | null;
+  finishDate: Date | null;
 }

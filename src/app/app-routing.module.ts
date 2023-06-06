@@ -7,6 +7,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FeatureListComponent } from './feature/feature-list/feature-list.component';
 import { CreateFeatureComponent } from './feature/create-feature/create-feature.component';
 import { FeatureDetailsComponent } from './feature/feature-details/feature-details.component';
+import { CreateTaskComponent } from './task/create-task/create-task.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,10 @@ const routes: Routes = [
       {
         path: 'tasks',
         component: TaskListComponent,
+      },
+      {
+        path: 'task/add',
+        component: CreateTaskComponent,
       },
     ],
   },

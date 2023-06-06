@@ -27,7 +27,6 @@ export class CreateFeatureComponent implements OnInit {
   }
 
   addFeature() {
-    console.log(this.feature);
     if (this.feature.valid) {
       const newFeature = <Feature>this.feature.value;
       this._featureService.addFeature(newFeature);

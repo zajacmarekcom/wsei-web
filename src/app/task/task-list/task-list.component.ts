@@ -12,6 +12,7 @@ import { TaskService } from 'src/shared/services/task.service';
 export class TaskListComponent implements OnInit {
   constructor(private taskService: TaskService) {}
 
+  status = Status;
   toDo: Task[] = [];
   doing: Task[] = [];
   done: Task[] = [];
@@ -24,15 +25,40 @@ export class TaskListComponent implements OnInit {
     this.done = tasks.filter((t) => t.status === Status.Done);
   }
 
-  startTask(event: CdkDragDrop<Task[]>) {
+  moveTask(event: CdkDragDrop<Task[]>, targetStatus: Status) {
     if (event.previousContainer != event.container) {
-      console.group(event.item.data);
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex
       );
+      switch (targetStatus) {
+        case Status.ToDo:
+          this.resetTask(event);
+          break;
+        case Status.Doing:
+          this.startTask(event);
+          break;
+        case Status.Done:
+          this.finishTask(event);
+          break;
+      }
     }
+  }
+
+  resetTask(event: CdkDragDrop<Task[]>) {
+    const task = event.container.data.at(event.currentIndex)!;
+    this.taskService.resetTask(task);
+  }
+
+  startTask(event: CdkDragDrop<Task[]>) {
+    const task = event.container.data.at(event.currentIndex)!;
+    this.taskService.startTask(task);
+  }
+
+  finishTask(event: CdkDragDrop<Task[]>) {
+    const task = event.container.data.at(event.currentIndex)!;
+    this.taskService.finishTask(task);
   }
 }

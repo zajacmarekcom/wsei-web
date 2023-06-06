@@ -2,7 +2,9 @@
   <mat-card-header>
     <mat-card-title-group>
       <mat-card-title>Tasks</mat-card-title>
-      <button mat-flat-button color="accent">New task</button>
+      <button routerLink="/app/task/add" mat-flat-button color="accent">
+        New task
+      </button>
     </mat-card-title-group>
   </mat-card-header>
   <mat-card-content>
@@ -11,21 +13,21 @@
         <app-task-list-column
           title="To do"
           [data]="toDo"
-          [dropEvent]="startTask"
+          (dropEvent)="moveTask($event, status.ToDo)"
         ></app-task-list-column>
       </div>
       <div class="col border-right">
         <app-task-list-column
           title="Doing"
           [data]="doing"
-          [dropEvent]="startTask"
+          (dropEvent)="moveTask($event, status.Doing)"
         ></app-task-list-column>
       </div>
       <div class="col">
         <app-task-list-column
           title="Done"
           [data]="done"
-          [dropEvent]="startTask"
+          (dropEvent)="moveTask($event, status.Done)"
         ></app-task-list-column>
       </div>
     </div>

@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from 'src/shared/models/task';
 
 @Component({
@@ -8,6 +9,12 @@ import { Task } from 'src/shared/models/task';
 })
 export class TaskListColumnComponent {
   @Input() data: Task[] = [];
-  @Input() dropEvent: ($event: any) => void = () => {};
   @Input() title: string = '';
+  @Output() dropEvent: EventEmitter<CdkDragDrop<Task[]>> = new EventEmitter<
+    CdkDragDrop<Task[]>
+  >();
+
+  drop(event: CdkDragDrop<Task[]>) {
+    this.dropEvent.next(event);
+  }
 }

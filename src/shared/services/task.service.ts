@@ -16,6 +16,8 @@ export class TaskService {
     const newId = ids.length > 0 ? Math.max(...ids) + 1 : 1;
 
     newTask.id = newId;
+    newTask.status = Status.ToDo;
+    newTask.createDate = new Date();
     this._tasks.push(newTask);
   }
 
@@ -33,6 +35,20 @@ export class TaskService {
     const task = this._tasks.find((x) => x.id === id);
 
     return task;
+  }
+
+  resetTask(task: Task) {
+    const taskIndex = this._tasks.findIndex((x) => x.id === task.id);
+    let taskToReset = this._tasks[taskIndex];
+    if (taskToReset.status == Status.ToDo) {
+      return;
+    }
+
+    taskToReset.status = Status.ToDo;
+    taskToReset.startDate = null;
+    this._tasks[taskIndex] = taskToReset;
+
+    return;
   }
 
   startTask(task: Task) {

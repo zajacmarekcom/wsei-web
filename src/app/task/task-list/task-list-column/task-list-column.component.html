@@ -2,7 +2,7 @@
 <mat-list
   cdkDropList
   [cdkDropListData]="data"
-  (cdkDropListDropped)="dropEvent($event)"
+  (cdkDropListDropped)="drop($event)"
 >
   <mat-list-item class="border my-2" *ngFor="let item of data" cdkDrag
     ><a matListItemTitle href="#">{{ item.title }}</a></mat-list-item
