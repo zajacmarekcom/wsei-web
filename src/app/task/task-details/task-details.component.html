@@ -1,1 +1,46 @@
-<p>task-details works!</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title-group>
+      <mat-card-title>Task: {{ task?.title }}</mat-card-title>
+      <div>
+        <button (click)="finishTask()" color="primary" mat-flat-button>
+          Finish
+        </button>
+        <button
+          [routerLink]="['/app/task/update/', id]"
+          color="secondary"
+          mat-flat-button
+        >
+          Edit
+        </button>
+        <button routerLink="/app/tasks" mat-flat-button>Back</button>
+      </div>
+    </mat-card-title-group>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-card>
+      <mat-card-content>
+        <h4>
+          Feature: <b>{{ getFeatureTitle() }}</b>
+        </h4>
+        <h4>
+          Status: <b>{{ getStatus(task?.status) }}</b>
+        </h4>
+        <h4>
+          Created: <b>{{ task?.createDate | date }}</b>
+        </h4>
+        <h4>
+          Started: <b>{{ task?.startDate | date }}</b>
+        </h4>
+        <h4>
+          Finished: <b>{{ task?.finishDate | date }}</b>
+        </h4>
+        <h5>Estimated time: {{ task?.estimatedTime }}</h5>
+        <div>
+          <h5>Description</h5>
+          {{ task?.description }}
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-card-content>
+</mat-card>

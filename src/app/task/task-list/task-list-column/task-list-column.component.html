@@ -5,6 +5,8 @@
   (cdkDropListDropped)="drop($event)"
 >
   <mat-list-item class="border my-2" *ngFor="let item of data" cdkDrag
-    ><a matListItemTitle href="#">{{ item.title }}</a></mat-list-item
+    ><a matListItemTitle [routerLink]="['/app/task/details/', item.id]">{{
+      item.title
+    }}</a></mat-list-item
   >
 </mat-list>

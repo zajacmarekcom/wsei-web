@@ -8,6 +8,8 @@ import { FeatureListComponent } from './feature/feature-list/feature-list.compon
 import { CreateFeatureComponent } from './feature/create-feature/create-feature.component';
 import { FeatureDetailsComponent } from './feature/feature-details/feature-details.component';
 import { CreateTaskComponent } from './task/create-task/create-task.component';
+import { UpdateFeatureComponent } from './feature/update-feature/update-feature.component';
+import { TaskDetailsComponent } from './task/task-details/task-details.component';
 
 const routes: Routes = [
   {
@@ -37,8 +39,16 @@ const routes: Routes = [
         component: FeatureDetailsComponent,
       },
       {
+        path: 'feature/update/:id',
+        component: UpdateFeatureComponent,
+      },
+      {
         path: 'tasks',
         component: TaskListComponent,
+      },
+      {
+        path: 'task/details/:id',
+        component: TaskDetailsComponent,
       },
       {
         path: 'task/add',

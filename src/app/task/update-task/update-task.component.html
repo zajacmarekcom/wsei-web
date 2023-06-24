@@ -1,1 +1,55 @@
-<p>update-task works!</p>
+<mat-card class="form-card">
+  <mat-card-header>
+    <mat-card-title-group>
+      <mat-card-title>Edit task</mat-card-title>
+    </mat-card-title-group>
+  </mat-card-header>
+  <mat-card-content class="vertical-content" [formGroup]="task">
+    <mat-form-field class="w-100">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" required />
+      <span *ngIf="task.controls.title.touched && task.controls.title.errors">{{
+        task.controls.title.errors | json
+      }}</span>
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <mat-label>Feature</mat-label>
+      <mat-select disabled [(value)]="featureId">
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let feature of getFeatures()" [value]="feature.id">
+          {{ feature.title }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <mat-label>Priority</mat-label>
+      <mat-select formControlName="priority" required>
+        <mat-option [value]="priority.Low">Low</mat-option>
+        <mat-option [value]="priority.Medium">Medium</mat-option>
+        <mat-option [value]="priority.High">High</mat-option>
+      </mat-select>
+      <span
+        *ngIf="task.controls.priority.touched && task.controls.priority.errors"
+        >{{ task.controls.priority.errors | json }}</span
+      >
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <mat-label>Estimated time</mat-label>
+      <input matInput formControlName="estimatedTime" required />
+      <span
+        *ngIf="
+          task.controls.estimatedTime.touched &&
+          task.controls.estimatedTime.errors
+        "
+        >{{ task.controls.estimatedTime.errors | json }}</span
+      >
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-actions>
+    <button (click)="saveTask()" mat-flat-button color="accent">Add</button>
+  </mat-card-actions>
+</mat-card>

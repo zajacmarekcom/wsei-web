@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Feature } from 'src/shared/models/feature';
 import { Status } from 'src/shared/models/status';
 import { FeatureService } from 'src/shared/services/feature.service';
@@ -11,20 +11,21 @@ import { TaskService } from 'src/shared/services/task.service';
   styleUrls: ['./feature-details.component.scss'],
 })
 export class FeatureDetailsComponent implements OnInit {
+  id!: number | null;
   feature!: Feature | null;
 
   constructor(
     private taskService: TaskService,
     private featureService: FeatureService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _router: Router
   ) {}
 
   ngOnInit(): void {
-    const featureId = this.route.snapshot.paramMap.get('id');
+    this.id = Number.parseInt(this.route.snapshot.paramMap.get('id')!);
 
-    if (featureId) {
-      this.feature =
-        this.featureService.getFeature(Number.parseInt(featureId)) ?? null;
+    if (this.id) {
+      this.feature = this.featureService.getFeature(this.id) ?? null;
     }
   }
 
@@ -48,5 +49,10 @@ export class FeatureDetailsComponent implements OnInit {
       case Status.Done:
         return 'Done';
     }
+  }
+
+  finishFeature() {
+    this.featureService.finishFeature(this.id!);
+    this._router.navigate(['app/features']);
   }
 }

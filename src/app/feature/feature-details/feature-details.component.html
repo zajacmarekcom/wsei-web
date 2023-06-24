@@ -2,7 +2,19 @@
   <mat-card-header>
     <mat-card-title-group>
       <mat-card-title>Feature: {{ feature?.title }}</mat-card-title>
-      <button routerLink="/app/features" mat-flat-button>Back</button>
+      <div>
+        <button (click)="finishFeature()" color="primary" mat-flat-button>
+          Finish
+        </button>
+        <button
+          [routerLink]="['/app/feature/update/', id]"
+          color="secondary"
+          mat-flat-button
+        >
+          Edit
+        </button>
+        <button routerLink="/app/features" mat-flat-button>Back</button>
+      </div>
     </mat-card-title-group>
   </mat-card-header>
   <mat-card-content>
@@ -12,6 +24,7 @@
           Status: <b>{{ getStatus(feature?.status) }}</b>
         </h4>
         <div>
+          <h5>Description</h5>
           {{ feature?.description }}
         </div>
       </mat-card-content>

@@ -7,9 +7,22 @@ import { FeatureService } from './feature.service';
   providedIn: 'root',
 })
 export class TaskService {
+  private readonly storageKey = 'tasks';
+
   private _tasks: Task[] = [];
 
-  constructor(private featureService: FeatureService) {}
+  constructor(private featureService: FeatureService) {
+    const json = localStorage.getItem(this.storageKey);
+
+    if (json) {
+      this._tasks = JSON.parse(json);
+    }
+  }
+
+  private storeTasks() {
+    const json = JSON.stringify(this._tasks);
+    localStorage.setItem(this.storageKey, json);
+  }
 
   addTask(newTask: Task) {
     const ids = this._tasks.map((x) => x.id);
@@ -19,6 +32,20 @@ export class TaskService {
     newTask.status = Status.ToDo;
     newTask.createDate = new Date();
     this._tasks.push(newTask);
+    this.storeTasks();
+  }
+
+  updateTask(task: Task) {
+    this._tasks = this._tasks.map((t: Task) => {
+      if (t.id === task.id) {
+        t.title = task.title;
+        t.priority = task.priority;
+        t.estimatedTime = task.estimatedTime;
+        t.description = task.description;
+      }
+      return t;
+    });
+    this.storeTasks();
   }
 
   getTasks() {
@@ -38,45 +65,36 @@ export class TaskService {
   }
 
   resetTask(task: Task) {
-    const taskIndex = this._tasks.findIndex((x) => x.id === task.id);
-    let taskToReset = this._tasks[taskIndex];
-    if (taskToReset.status == Status.ToDo) {
-      return;
-    }
-
-    taskToReset.status = Status.ToDo;
-    taskToReset.startDate = null;
-    this._tasks[taskIndex] = taskToReset;
-
-    return;
+    this._tasks = this._tasks.map((t: Task) => {
+      if (t.id === task.id && t.status != Status.ToDo) {
+        t.status = Status.ToDo;
+        t.startDate = null;
+      }
+      return t;
+    });
+    this.storeTasks();
   }
 
   startTask(task: Task) {
-    const taskIndex = this._tasks.findIndex((x) => x.id === task.id);
-    let taskToStart = this._tasks[taskIndex];
-    if (taskToStart.status != Status.ToDo) {
-      return false;
-    }
-
-    taskToStart.status = Status.Doing;
-    taskToStart.startDate = new Date();
-    this._tasks[taskIndex] = taskToStart;
-    this.featureService.startFeature(taskToStart.featureId);
-
-    return true;
+    this._tasks = this._tasks.map((t: Task) => {
+      if (t.id === task.id && t.status === Status.ToDo) {
+        t.status = Status.Doing;
+        t.startDate = new Date();
+      }
+      return t;
+    });
+    this.featureService.startFeature(task.featureId);
+    this.storeTasks();
   }
 
   finishTask(task: Task) {
-    const taskIndex = this._tasks.findIndex((x) => x.id === task.id);
-    let taskToFinish = this._tasks[taskIndex];
-    if (taskToFinish.status != Status.Doing) {
-      return false;
-    }
-
-    taskToFinish.status = Status.Done;
-    taskToFinish.finishDate = new Date();
-    this._tasks[taskIndex] = taskToFinish;
-
-    return true;
+    this._tasks = this._tasks.map((t: Task) => {
+      if (t.id === task.id && t.status === Status.Doing) {
+        t.status = Status.Doing;
+        t.finishDate = new Date();
+      }
+      return t;
+    });
+    this.storeTasks();
   }
 }

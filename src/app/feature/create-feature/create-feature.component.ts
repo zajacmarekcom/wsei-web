@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FeatureService } from 'src/shared/services/feature.service';
 import { NewFeature } from './new-feature.model';
 import { Feature } from 'src/shared/models/feature';
+import { Priority } from 'src/shared/models/priority';
 
 @Component({
   selector: 'app-create-feature',
@@ -11,6 +12,7 @@ import { Feature } from 'src/shared/models/feature';
   styleUrls: ['./create-feature.component.scss'],
 })
 export class CreateFeatureComponent implements OnInit {
+  priority = Priority;
   feature!: FormGroup<NewFeature>;
 
   constructor(
@@ -23,6 +25,7 @@ export class CreateFeatureComponent implements OnInit {
     this.feature = this.fb.group({
       title: this.fb.nonNullable.control('', [Validators.required]),
       description: this.fb.control(''),
+      priority: this.fb.nonNullable.control(Priority.Medium),
     });
   }
 
