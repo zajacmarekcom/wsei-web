@@ -10,6 +10,7 @@ import { FeatureDetailsComponent } from './feature/feature-details/feature-detai
 import { CreateTaskComponent } from './task/create-task/create-task.component';
 import { UpdateFeatureComponent } from './feature/update-feature/update-feature.component';
 import { TaskDetailsComponent } from './task/task-details/task-details.component';
+import { UpdateTaskComponent } from './task/update-task/update-task.component';
 
 const routes: Routes = [
   {
@@ -49,6 +50,10 @@ const routes: Routes = [
       {
         path: 'task/details/:id',
         component: TaskDetailsComponent,
+      },
+      {
+        path: 'task/update/:id',
+        component: UpdateTaskComponent,
       },
       {
         path: 'task/add',

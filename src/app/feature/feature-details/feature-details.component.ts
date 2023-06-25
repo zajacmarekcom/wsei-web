@@ -55,4 +55,9 @@ export class FeatureDetailsComponent implements OnInit {
     this.featureService.finishFeature(this.id!);
     this._router.navigate(['app/features']);
   }
+
+  deleteFeature() {
+    this.featureService.deleteFeature(this.id!);
+    this._router.navigate(['app/features']);
+  }
 }

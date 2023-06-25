@@ -45,6 +45,11 @@ export class FeatureService {
     this.storeFeatures();
   }
 
+  deleteFeature(id: number) {
+    this._features = this._features.filter((f: Feature) => f.id != id);
+    this.storeFeatures();
+  }
+
   getFeatures() {
     return this._features;
   }

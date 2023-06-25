@@ -48,6 +48,11 @@ export class TaskService {
     this.storeTasks();
   }
 
+  deleteTask(id: number) {
+    this._tasks = this._tasks.filter((t: Task) => t.id != id);
+    this.storeTasks();
+  }
+
   getTasks() {
     return this._tasks;
   }
@@ -90,7 +95,7 @@ export class TaskService {
   finishTask(task: Task) {
     this._tasks = this._tasks.map((t: Task) => {
       if (t.id === task.id && t.status === Status.Doing) {
-        t.status = Status.Doing;
+        t.status = Status.Done;
         t.finishDate = new Date();
       }
       return t;

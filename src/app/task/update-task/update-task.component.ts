@@ -51,6 +51,7 @@ export class UpdateTaskComponent {
   saveTask() {
     if (this.task.valid) {
       const editTask = <Task>this.task.value;
+      editTask.id = this.id;
       this._taskService.updateTask(editTask);
       this._router.navigate(['app/tasks']);
     }

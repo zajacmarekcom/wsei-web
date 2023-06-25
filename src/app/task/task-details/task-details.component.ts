@@ -52,4 +52,9 @@ export class TaskDetailsComponent {
     this.taskService.finishTask(this.task!);
     this._router.navigate(['app/tasks']);
   }
+
+  deleteTask() {
+    this.taskService.deleteTask(this.id!);
+    this._router.navigate(['app/tasks']);
+  }
 }
