@@ -100,6 +100,15 @@ export class TaskService {
       }
       return t;
     });
+
+    if (
+      this._tasks
+        .filter((t) => t.featureId === task.featureId)
+        .every((t) => t.status === Status.Done)
+    ) {
+      this.featureService.finishFeature(task.featureId);
+    }
+
     this.storeTasks();
   }
 }
