@@ -15,10 +15,10 @@
           >
         </h3>
         <div class="property">
-          Status: <b>{{ getStatus(task?.status) }}</b>
+          Status: <b>{{ getStatus(task!.status) }}</b>
         </div>
         <div class="property">
-          Priority: <b>{{ getPriority(task!) }}</b>
+          Priority: <b>{{ getPriority(task!.priority) }}</b>
         </div>
         <div class="property">
           Estimated time: <b>{{ task?.estimatedTime }}</b>

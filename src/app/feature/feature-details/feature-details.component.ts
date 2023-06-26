@@ -5,11 +5,11 @@ import { Priority } from 'src/shared/models/priority';
 import { Status } from 'src/shared/models/status';
 import { FeatureService } from 'src/shared/services/feature.service';
 import { TaskService } from 'src/shared/services/task.service';
+import { getStatusText, getPriorityText } from 'src/shared/utils';
 
 @Component({
   selector: 'app-feature-details',
   templateUrl: './feature-details.component.html',
-  styleUrls: ['./feature-details.component.scss'],
 })
 export class FeatureDetailsComponent implements OnInit {
   id!: number | null;
@@ -30,37 +30,20 @@ export class FeatureDetailsComponent implements OnInit {
     }
   }
 
+  getStatus(status: Status) {
+    return getStatusText(status);
+  }
+
+  getPriority(priority: Priority) {
+    return getPriorityText(priority);
+  }
+
   getTasks() {
     const featureId = this.route.snapshot.paramMap.get('id');
     if (featureId) {
       return this.taskService.getTasksForFeature(Number.parseInt(featureId));
     }
     return [];
-  }
-
-  getStatus(status: Status | undefined) {
-    if (status == undefined) {
-      return '';
-    }
-    switch (status) {
-      case Status.ToDo:
-        return 'To do';
-      case Status.Doing:
-        return 'Doing';
-      case Status.Done:
-        return 'Done';
-    }
-  }
-
-  getPriority(feature: Feature) {
-    switch (feature.priority) {
-      case Priority.Low:
-        return 'Low';
-      case Priority.Medium:
-        return 'Medium';
-      case Priority.High:
-        return 'High';
-    }
   }
 
   isInProgress() {

@@ -30,8 +30,6 @@ import { FeatureDetailsComponent } from './feature/feature-details/feature-detai
 import { UpdateFeatureComponent } from './feature/update-feature/update-feature.component';
 import { TaskDetailsComponent } from './task/task-details/task-details.component';
 import { TaskListColumnComponent } from './task/task-list/task-list-column/task-list-column.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +44,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     UpdateFeatureComponent,
     TaskDetailsComponent,
     TaskListColumnComponent,
-    DashboardComponent,
   ],
   imports: [
     CdkDropListGroup,

@@ -3,6 +3,7 @@ import { Feature } from 'src/shared/models/feature';
 import { Priority } from 'src/shared/models/priority';
 import { Status } from 'src/shared/models/status';
 import { FeatureService } from 'src/shared/services/feature.service';
+import { getStatusText, getPriorityText } from 'src/shared/utils';
 
 @Component({
   selector: 'app-feature-list',
@@ -14,25 +15,11 @@ export class FeatureListComponent {
 
   constructor(public featureService: FeatureService) {}
 
-  getStatus(feature: Feature) {
-    switch (feature.status) {
-      case Status.ToDo:
-        return 'To do';
-      case Status.Doing:
-        return 'Doing';
-      case Status.Done:
-        return 'Done';
-    }
+  getStatus(status: Status) {
+    return getStatusText(status);
   }
 
-  getPriority(feature: Feature) {
-    switch (feature.priority) {
-      case Priority.Low:
-        return 'Low';
-      case Priority.Medium:
-        return 'Medium';
-      case Priority.High:
-        return 'High';
-    }
+  getPriority(priority: Priority) {
+    return getPriorityText(priority);
   }
 }

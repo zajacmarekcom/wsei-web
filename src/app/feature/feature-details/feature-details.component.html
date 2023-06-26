@@ -9,10 +9,10 @@
       <mat-card-content>
         <h1>Feature: {{ feature?.title }}</h1>
         <div class="property">
-          Status: <b>{{ getStatus(feature?.status) }}</b>
+          Status: <b>{{ getStatus(feature!.status) }}</b>
         </div>
         <div class="property">
-          Priority: <b>{{ getPriority(feature!) }}</b>
+          Priority: <b>{{ getPriority(feature!.priority) }}</b>
         </div>
         <div>
           <h5>Description</h5>

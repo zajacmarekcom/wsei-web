@@ -5,11 +5,11 @@ import { Status } from 'src/shared/models/status';
 import { Task } from 'src/shared/models/task';
 import { FeatureService } from 'src/shared/services/feature.service';
 import { TaskService } from 'src/shared/services/task.service';
+import { getStatusText, getPriorityText } from 'src/shared/utils';
 
 @Component({
   selector: 'app-task-details',
   templateUrl: './task-details.component.html',
-  styleUrls: ['./task-details.component.scss'],
 })
 export class TaskDetailsComponent {
   id!: number | null;
@@ -35,29 +35,12 @@ export class TaskDetailsComponent {
     return feature?.title;
   }
 
-  getStatus(status: Status | undefined) {
-    if (status == undefined) {
-      return '';
-    }
-    switch (status) {
-      case Status.ToDo:
-        return 'To do';
-      case Status.Doing:
-        return 'Doing';
-      case Status.Done:
-        return 'Done';
-    }
+  getStatus(status: Status) {
+    return getStatusText(status);
   }
 
-  getPriority(task: Task) {
-    switch (task.priority) {
-      case Priority.Low:
-        return 'Low';
-      case Priority.Medium:
-        return 'Medium';
-      case Priority.High:
-        return 'High';
-    }
+  getPriority(priority: Priority) {
+    return getPriorityText(priority);
   }
 
   isInProgress() {

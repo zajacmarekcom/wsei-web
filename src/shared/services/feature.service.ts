@@ -22,6 +22,15 @@ export class FeatureService {
     localStorage.setItem(this.storageKey, json);
   }
 
+  getFeatures() {
+    return this._features;
+  }
+
+  getFeature(id: number) {
+    const feature = this._features.find((x) => x.id === id);
+    return feature;
+  }
+
   addFeature(newFeature: Feature) {
     const ids = this._features.map((x) => x.id);
     const newId = ids.length > 0 ? Math.max(...ids) + 1 : 1;
@@ -48,15 +57,6 @@ export class FeatureService {
   deleteFeature(id: number) {
     this._features = this._features.filter((f: Feature) => f.id != id);
     this.storeFeatures();
-  }
-
-  getFeatures() {
-    return this._features;
-  }
-
-  getFeature(id: number) {
-    const feature = this._features.find((x) => x.id === id);
-    return feature;
   }
 
   startFeature(id: number) {

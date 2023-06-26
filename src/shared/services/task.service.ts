@@ -24,6 +24,22 @@ export class TaskService {
     localStorage.setItem(this.storageKey, json);
   }
 
+  getTasks() {
+    return this._tasks;
+  }
+
+  getTasksForFeature(featureId: number) {
+    const tasks = this._tasks.filter((x) => x.featureId === featureId);
+
+    return tasks;
+  }
+
+  getTask(id: number) {
+    const task = this._tasks.find((x) => x.id === id);
+
+    return task;
+  }
+
   addTask(newTask: Task) {
     const ids = this._tasks.map((x) => x.id);
     const newId = ids.length > 0 ? Math.max(...ids) + 1 : 1;
@@ -51,22 +67,6 @@ export class TaskService {
   deleteTask(id: number) {
     this._tasks = this._tasks.filter((t: Task) => t.id != id);
     this.storeTasks();
-  }
-
-  getTasks() {
-    return this._tasks;
-  }
-
-  getTasksForFeature(featureId: number) {
-    const tasks = this._tasks.filter((x) => x.featureId === featureId);
-
-    return tasks;
-  }
-
-  getTask(id: number) {
-    const task = this._tasks.find((x) => x.id === id);
-
-    return task;
   }
 
   resetTask(task: Task) {
