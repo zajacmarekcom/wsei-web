@@ -10,7 +10,6 @@ import { EditTask } from './edit-task.model';
 @Component({
   selector: 'app-update-task',
   templateUrl: './update-task.component.html',
-  styleUrls: ['./update-task.component.scss'],
 })
 export class UpdateTaskComponent {
   id!: number;

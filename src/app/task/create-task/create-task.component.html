@@ -27,18 +27,9 @@
         >Required</span
       >
     </mat-form-field>
-    <mat-form-field class="w-100">
-      <mat-label>Priority</mat-label>
-      <mat-select formControlName="priority" required>
-        <mat-option [value]="priority.Low">Low</mat-option>
-        <mat-option [value]="priority.Medium">Medium</mat-option>
-        <mat-option [value]="priority.High">High</mat-option>
-      </mat-select>
-      <span
-        *ngIf="task.controls.priority.touched && task.controls.priority.errors"
-        >Required</span
-      >
-    </mat-form-field>
+    <app-priority
+      [isError]="task.controls.priority.touched && task.controls.title.errors"
+    ></app-priority>
     <mat-form-field class="w-100">
       <mat-label>Description</mat-label>
       <textarea matInput formControlName="description"></textarea>
