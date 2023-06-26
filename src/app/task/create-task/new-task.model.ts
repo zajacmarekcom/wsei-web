@@ -4,7 +4,7 @@ import { Priority } from 'src/shared/models/priority';
 export type NewTask = {
   title: FormControl<string>;
   description: FormControl<string | null>;
-  featureId: FormControl<number>;
+  featureId: FormControl<number | null>;
   estimatedTime: FormControl<number>;
   priority: FormControl<Priority>;
 };

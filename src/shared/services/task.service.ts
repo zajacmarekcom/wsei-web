@@ -82,7 +82,7 @@ export class TaskService {
 
   startTask(task: Task) {
     this._tasks = this._tasks.map((t: Task) => {
-      if (t.id === task.id && t.status === Status.ToDo) {
+      if (t.id === task.id && t.status != Status.Doing) {
         t.status = Status.Doing;
         t.startDate = new Date();
       }
@@ -94,7 +94,7 @@ export class TaskService {
 
   finishTask(task: Task) {
     this._tasks = this._tasks.map((t: Task) => {
-      if (t.id === task.id && t.status === Status.Doing) {
+      if (t.id === task.id && t.status != Status.Done) {
         t.status = Status.Done;
         t.finishDate = new Date();
       }

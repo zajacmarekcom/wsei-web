@@ -27,7 +27,9 @@ export class CreateTaskComponent implements OnInit {
     this.task = this._fb.group({
       title: this._fb.nonNullable.control('', [Validators.required]),
       description: this._fb.control(''),
-      featureId: this._fb.nonNullable.control(0, [Validators.required]),
+      featureId: this._fb.nonNullable.control<number | null>(null, [
+        Validators.required,
+      ]),
       estimatedTime: this._fb.nonNullable.control(0, [
         Validators.required,
         Validators.min(0),

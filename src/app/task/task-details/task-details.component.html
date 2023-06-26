@@ -1,51 +1,63 @@
-<mat-card>
+<mat-card class="details-card">
   <mat-card-header>
     <mat-card-title-group>
-      <mat-card-title>Task: {{ task?.title }}</mat-card-title>
-      <div>
-        <button (click)="finishTask()" color="primary" mat-flat-button>
-          Finish
-        </button>
-        <button
-          [routerLink]="['/app/task/update/', id]"
-          color="secondary"
-          mat-flat-button
-        >
-          Edit
-        </button>
-        <button routerLink="/app/tasks" mat-flat-button>Back</button>
-      </div>
+      <button routerLink="/app/tasks" mat-flat-button>Back</button>
     </mat-card-title-group>
   </mat-card-header>
   <mat-card-content>
     <mat-card>
       <mat-card-content>
-        <h4>
-          Feature: <b>{{ getFeatureTitle() }}</b>
-        </h4>
-        <h4>
+        <h1>Task: {{ task?.title }}</h1>
+        <h3>
+          Feature:
+          <a [routerLink]="['/app/feature/details', task?.featureId]">
+            {{ getFeatureTitle() }}</a
+          >
+        </h3>
+        <div class="property">
           Status: <b>{{ getStatus(task?.status) }}</b>
-        </h4>
-        <h4>
-          Created: <b>{{ task?.createDate | date }}</b>
-        </h4>
-        <h4>
-          Started: <b>{{ task?.startDate | date }}</b>
-        </h4>
-        <h4>
-          Finished: <b>{{ task?.finishDate | date }}</b>
-        </h4>
-        <h5>Estimated time: {{ task?.estimatedTime }}</h5>
+        </div>
+        <div class="property">
+          Priority: <b>{{ getPriority(task!) }}</b>
+        </div>
+        <div class="property">
+          Estimated time: <b>{{ task?.estimatedTime }}</b>
+        </div>
         <div>
           <h5>Description</h5>
-          {{ task?.description }}
+          <div class="description">
+            {{ task?.description }}
+          </div>
+        </div>
+
+        <div class="property property-small">
+          Created on: <b>{{ task?.createDate | date }}</b>
+        </div>
+        <div *ngIf="isInProgress()" class="property property-small">
+          Started on: <b>{{ task?.startDate | date }}</b>
+        </div>
+        <div *ngIf="isFinished()" class="property property-small">
+          Finished on: <b>{{ task?.finishDate | date }}</b>
         </div>
       </mat-card-content>
     </mat-card>
   </mat-card-content>
   <mat-card-actions>
-    <button (click)="deleteTask()" mat-icon-button color="accent">
-      <mat-icon>delete</mat-icon>
+    <button
+      *ngIf="!isFinished()"
+      (click)="finishTask()"
+      color="primary"
+      mat-flat-button
+    >
+      Finish
     </button>
+    <button
+      [routerLink]="['/app/task/update/', id]"
+      color="accent"
+      mat-flat-button
+    >
+      Edit
+    </button>
+    <button (click)="deleteTask()" mat-flat-button color="warn">Delete</button>
   </mat-card-actions>
 </mat-card>

@@ -10,7 +10,7 @@
       <input matInput formControlName="title" />
       <span
         *ngIf="feature.controls.title.touched && feature.controls.title.errors"
-        >{{ feature.controls.title.errors | json }}</span
+        >Required</span
       >
     </mat-form-field>
     <mat-form-field class="w-100">
@@ -24,7 +24,7 @@
         *ngIf="
           feature.controls.priority.touched && feature.controls.priority.errors
         "
-        >{{ feature.controls.priority.errors | json }}</span
+        >Required</span
       >
     </mat-form-field>
     <mat-form-field class="w-100">
