@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Feature } from 'src/shared/models/feature';
+import { Priority } from 'src/shared/models/priority';
 import { Status } from 'src/shared/models/status';
 import { FeatureService } from 'src/shared/services/feature.service';
 import { TaskService } from 'src/shared/services/task.service';
@@ -49,6 +50,25 @@ export class FeatureDetailsComponent implements OnInit {
       case Status.Done:
         return 'Done';
     }
+  }
+
+  getPriority(feature: Feature) {
+    switch (feature.priority) {
+      case Priority.Low:
+        return 'Low';
+      case Priority.Medium:
+        return 'Medium';
+      case Priority.High:
+        return 'High';
+    }
+  }
+
+  isInProgress() {
+    return this.feature?.status === Status.Doing;
+  }
+
+  isFinished() {
+    return this.feature?.status === Status.Done;
   }
 
   finishFeature() {
